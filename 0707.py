@@ -1,10 +1,19 @@
+class Node:
+    def __init__(self, value, upper, tail):
+        self.value = value
+        self.tail = tail
+        self.upper = upper
+
+    def __str__(self):
+        return "Node({},{},{})".format(self.value, "upper" if self.upper else "None", "tail" if self.tail else "None")
+
 class MyLinkedList:
     def __init__(self):
         self.first = None
         self.last = None
         self.length = 0
 
-    def getNode(self, index: int):
+    def getNode(self, index: int) -> Node:
         if index >= 0 and index < self.length:
             node = self.first
             for _ in range(index):
@@ -51,15 +60,8 @@ class MyLinkedList:
             oldUpper = node.upper
             oldTail = node
             newNode = Node(val, oldUpper, oldTail)
-            if oldUpper:
-                oldUpper.tail = newNode
-            if oldTail:
-                oldTail.upper = newNode
-            if not newNode.tail:
-                self.last = newNode
-            if not newNode.upper:
-                self.first = newNode
-
+            oldUpper.tail = newNode
+            oldTail.upper = newNode
             self.length += 1
 
     def deleteFromHead(self):
@@ -97,8 +99,7 @@ class MyLinkedList:
             newUpper = node.upper
             newTail = node.tail
             newUpper.tail = newTail
-            if newTail:
-                newTail.upper = newUpper
+            newTail.upper = newUpper
             self.length -= 1
 
     def __str__(self) -> str:
@@ -114,12 +115,3 @@ class MyLinkedList:
 
     def __len__(self):
         return self.length
-
-class Node:
-    def __init__(self, value, upper, tail):
-        self.value = value
-        self.tail = tail
-        self.upper = upper
-
-    def __str__(self):
-        return "Node({},{},{})".format(self.value, "upper" if self.upper else "None", "tail" if self.tail else "None")
