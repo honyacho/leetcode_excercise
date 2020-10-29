@@ -1,5 +1,5 @@
 class Solution:
-    def search(self, nums: List[int], target: int) -> int:
+    def search(self, nums: list, target: int) -> int:
         if not nums: return -1
         lo, hi = 0, len(nums)-1
         L = len(nums)
@@ -19,7 +19,7 @@ class Solution:
             else:
                 hi = mid
         # print(zero, lo)
-        
+
         if nums[(lo+zero)%L] == target:
             return (lo+zero)%L
         else:
